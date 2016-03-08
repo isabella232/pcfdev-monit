@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker build -t monit .
+container=$(docker create monit)
+docker cp $container:/monit/monit .
