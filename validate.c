@@ -199,8 +199,13 @@ int check_process(Service_T s) {
   if (!(pid = Util_isProcessRunning(s, FALSE))) {
     Event_post(s, Event_Nonexist, STATE_FAILED, s->action_NONEXIST, "process is not running");
     return FALSE;
-  } else
+  } else {
     Event_post(s, Event_Nonexist, STATE_SUCCEEDED, s->action_NONEXIST, "process is running with pid %d", (int)pid);
+
+    if (IS_EVENT_SET(s->error, Event_Exec)) {
+      Event_post(s, Event_Exec, STATE_SUCCEEDED, s->action_EXEC, "process is running with pid %d", (int)pid);
+    }
+  }
 
   if (Run.doprocess) {
     if (update_process_data(s, ptree, ptreesize, pid)) {
