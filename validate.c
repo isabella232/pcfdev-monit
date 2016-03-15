@@ -27,6 +27,14 @@
  * files in the program, then also delete it here.
  */
 
+/*
+ * Portions Copyright © 2016-Present Pivotal Software, Inc.
+ *
+ * Modified from Monit source code version 5.2.5 on Tue Mar 8 14:26:41 2016 -0500.
+ * In the event that a process is not in a running state but does have a PID, change the process state to running.
+ * Fixes an issue where processes never enter running state.
+*/
+
 #include <config.h>
 
 #ifdef HAVE_STDIO_H
